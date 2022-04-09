@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "Estados.h"
 
 const uint8_t boton = D1;
 
@@ -11,12 +12,8 @@ void setup()
 
 unsigned long inicioAntirrebote;
 const int tiempoAntirrebote = 30;
-int estadoActual = 0;
 
-const int ESPERANDO_PULSACION = 0;
-const int ANTIRREBOTE_PULSACION = 1;
-const int ESPERANDO_SOLTACION = 2;
-const int ANTIRREBOTE_SOLTACION = 3;
+Estados estadoActual = ESPERANDO_PULSACION;
 
 void loop()
 {

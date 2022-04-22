@@ -4,6 +4,7 @@
 Estados estadoActual = ESPERANDO_PULSACION;
 
 const uint8_t boton = D1;
+const unsigned int TIEMPO_CLICK_LARGO = 1000;
 
 void setup()
 {
@@ -15,13 +16,8 @@ void setup()
 unsigned long inicioAntirrebote;
 const int tiempoAntirrebote = 30;
 
-
-
 void loop()
 {
-  RefreshButtonState();
-
-
   switch (estadoActual)
   {
   case ESPERANDO_PULSACION:
@@ -38,12 +34,13 @@ void loop()
     }
     break;
   case ESPERANDO_SOLTACION:
-    if (digitalRead(boton) == LOW)
-    {
-      inicioAntirrebote = millis();
-      estadoActual = ANTIRREBOTE_SOLTACION;
-      Serial.println("Pulsado");
+    if (digitalRead(boton) != LOW){
+      break;
     }
+   
+    estadoActual = ANTIRREBOTE_SOLTACION;
+    (millis() - inicioAntirrebote >= TIEMPO_CLICK_LARGO) ? Serial.println("Click largo") : Serial.println("Click corto");
+    inicioAntirrebote = millis();
     break;
   case ANTIRREBOTE_SOLTACION:
     if (millis() - inicioAntirrebote >= tiempoAntirrebote)

@@ -1,17 +1,16 @@
 #include <Arduino.h>
-#include "boton.h"
+#include "Boton.h"
+#include <Eventos.h>
 
-
-const uint8_t boton = D1;
+Boton boton1(D1);
 
 void setup()
 {
   Serial.begin(115200);
   Serial.println("Bienvenido");
-  pinMode(boton, INPUT);
 }
 
 void loop()
 {
-  RefreshEstadoBoton(boton);
+  Eventos resultado_boton1 = boton1.Refresh();
 }

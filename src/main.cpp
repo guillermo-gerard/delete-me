@@ -13,4 +13,6 @@ void setup()
 void loop()
 {
   Eventos resultado_boton1 = boton1.Refresh();
+  if(resultado_boton1 == Eventos::CLICK)
+
 }

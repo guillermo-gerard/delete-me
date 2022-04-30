@@ -1,4 +1,3 @@
-#include "Eventos.h"
 #include "Estados.h"
 
 #ifndef Pepito
@@ -8,9 +7,15 @@ class Boton
 {
 public:
     Boton(int pin);
-    Eventos Refresh();
+    Boton(int pin, void (*fs)(), void (*fl)());
+    void Refresh();
+    void SetSimpleClickFunction(void (*f)());
+    void SetLongClickFunction(void (*f1)());
 private:
     int _pin;
+    void Configure(int);
+    void (*_simpleClickFunction)(); 
+    void (*_longClickFunction)(); 
     Estados _estadoActual;
     unsigned long _inicioAntirrebote;
     const unsigned int _tiempoAntirrebote = 30;
